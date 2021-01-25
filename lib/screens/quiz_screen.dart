@@ -40,18 +40,65 @@ class _QuizScreenState extends State<QuizScreen> {
     }
 
     quizEntries.shuffle();
-    print(quizEntries);
+    int currentQuestionIndex = 0;
 
     return WillPopScope(
-        onWillPop: _onBackPressed,
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text('Quiz'),
+      onWillPop: _onBackPressed,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Quiz'),
+        ),
+        body: Container(
+          padding: EdgeInsets.only(top: 40, left: 10, right: 10, bottom: 10),
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(bottom: 45),
+                child: Text(
+                  'Identify the kana shown:',
+                  style: TextStyle(color: Colors.grey),
+                ),
+              ),
+              Text(
+                quizEntries[currentQuestionIndex][0],
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 72,
+                ),
+              ),
+              Expanded(child: Container()),
+              Row(
+                children: [
+                  Expanded(
+                    flex: 4,
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Enter your answer',
+                        labelText: 'Type Romaji equivalent',
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: RaisedButton(
+                      child: Icon(
+                        Icons.arrow_right_alt,
+                        color: Colors.white,
+                      ),
+                      color: Colors.green[400],
+                      onPressed: () => {/** */},
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
-          body: Center(
-            child: Text(args.quizContents.toString()),
-          ),
-        ));
+        ),
+      ),
+    );
   }
 
   Future<bool> _onBackPressed() {
