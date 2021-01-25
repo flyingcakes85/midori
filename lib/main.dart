@@ -15,6 +15,7 @@ class Midori extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: HomeView(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
