@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:Midori/screens/quiz_screen.dart';
 
 class CharSetDialog extends StatefulWidget {
   final int chosenCharSet;
@@ -10,23 +11,23 @@ class CharSetDialog extends StatefulWidget {
 class _CharSetDialogState extends State<CharSetDialog> {
   var charSet = {
     {
-      {'lead': '25', 'text': 'First 25 Hiragana\nあ-な'},
-      {'lead': '20', 'text': 'Next 20 Hiragana\nは-を'},
-      {'lead': '25', 'text': 'Dakuten Kana\nが-ぽ'},
-      {'lead': '36', 'text': 'Combo Hiragana\nきゃ-ぴょ'}
+      {'lead': '25', 'text': 'First 25 Hiragana\nあ - な'},
+      {'lead': '20', 'text': 'Next 20 Hiragana\nは - を'},
+      {'lead': '25', 'text': 'Dakuten Kana\nが - ぽ'},
+      {'lead': '36', 'text': 'Combo Hiragana\nきゃ - ぴょ'}
     },
     {
-      {'lead': '25', 'text': 'First 25 Katakana\nア-ノ'},
-      {'lead': '20', 'text': 'Next 20 Katakana\nハ-ヲ'},
-      {'lead': '25', 'text': 'Dakuten Kana\nガ-ポ'},
-      {'lead': '36', 'text': 'Combo Katakana\nキャ-ピョ'}
+      {'lead': '25', 'text': 'First 25 Katakana\nア - ノ'},
+      {'lead': '20', 'text': 'Next 20 Katakana\nハ - ヲ'},
+      {'lead': '25', 'text': 'Dakuten Kana\nガ - ポ'},
+      {'lead': '36', 'text': 'Combo Katakana\nキャ - ピョ'}
     }
   };
 
   final int chosenCharSet;
   _CharSetDialogState(this.chosenCharSet);
 
-  var _checked = true;
+  var _checked = [false, false, false, false];
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -45,10 +46,10 @@ class _CharSetDialogState extends State<CharSetDialog> {
                   Text(charSet.elementAt(chosenCharSet).elementAt(0)['text']),
               secondary:
                   Text(charSet.elementAt(chosenCharSet).elementAt(0)['lead']),
-              value: _checked,
+              value: _checked[0],
               onChanged: (bool value) {
                 setState(() {
-                  _checked = value;
+                  _checked[0] = value;
                 });
               },
             ),
@@ -57,10 +58,10 @@ class _CharSetDialogState extends State<CharSetDialog> {
                   Text(charSet.elementAt(chosenCharSet).elementAt(1)['text']),
               secondary:
                   Text(charSet.elementAt(chosenCharSet).elementAt(1)['lead']),
-              value: _checked,
+              value: _checked[1],
               onChanged: (bool value) {
                 setState(() {
-                  _checked = value;
+                  _checked[1] = value;
                 });
               },
             ),
@@ -69,10 +70,10 @@ class _CharSetDialogState extends State<CharSetDialog> {
                   Text(charSet.elementAt(chosenCharSet).elementAt(2)['text']),
               secondary:
                   Text(charSet.elementAt(chosenCharSet).elementAt(2)['lead']),
-              value: _checked,
+              value: _checked[2],
               onChanged: (bool value) {
                 setState(() {
-                  _checked = value;
+                  _checked[2] = value;
                 });
               },
             ),
@@ -81,10 +82,10 @@ class _CharSetDialogState extends State<CharSetDialog> {
                   Text(charSet.elementAt(chosenCharSet).elementAt(3)['text']),
               secondary:
                   Text(charSet.elementAt(chosenCharSet).elementAt(3)['lead']),
-              value: _checked,
+              value: _checked[3],
               onChanged: (bool value) {
                 setState(() {
-                  _checked = value;
+                  _checked[3] = value;
                 });
               },
             ),
@@ -93,7 +94,18 @@ class _CharSetDialogState extends State<CharSetDialog> {
               children: <Widget>[
                 TextButton(
                   child: const Text('CONTINUE'),
-                  onPressed: () {/* ... */},
+                  onPressed: () {
+                    print(_checked);
+                    Navigator.pop(context, _checked);
+                    Navigator.pushNamed(
+                      context,
+                      QuizScreen.routeName,
+                      arguments: QuizArguments(
+                        chosenCharSet,
+                        _checked,
+                      ),
+                    );
+                  },
                 ),
                 const SizedBox(width: 10),
               ],
