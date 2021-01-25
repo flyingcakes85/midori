@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:Midori/home_view.dart';
 import 'package:Midori/screens/quiz_screen.dart';
+import 'package:Midori/screens/result_screen.dart';
 
 void main() => runApp(Midori());
 
@@ -19,6 +20,7 @@ class Midori extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         QuizScreen.routeName: (context) => QuizScreen(),
+        ResultScreen.routeName: (context) => ResultScreen(),
       },
     );
   }

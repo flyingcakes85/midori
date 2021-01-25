@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:Midori/romaji_maps.dart';
+import 'package:Midori/screens/result_screen.dart';
+import 'package:Midori/quiz_time_data.dart' as QuizTimeData;
 
 class QuizArguments {
-  final List<bool> quizContents;
-  final int chosenChar;
-
-  QuizArguments(this.chosenChar, this.quizContents);
+  QuizArguments();
 }
 
 class QuizScreen extends StatefulWidget {
@@ -18,29 +16,9 @@ class QuizScreen extends StatefulWidget {
 class _QuizScreenState extends State<QuizScreen> {
   @override
   Widget build(BuildContext context) {
-    final QuizArguments args = ModalRoute.of(context).settings.arguments;
-
     //Form the questions array here
-    List quizEntries = List();
 
-    if (args.chosenChar == 0) {
-      // Hiragana
-      for (int idx = 0; idx < 4; idx++) {
-        if (args.quizContents[idx] == true) {
-          quizEntries.addAll(RomajiMaps.hiraganaMap[idx]);
-        }
-      }
-    } else {
-      // Katakana
-      for (int idx = 0; idx < 4; idx++) {
-        if (args.quizContents[idx] == true) {
-          quizEntries.addAll(RomajiMaps.hiraganaMap[idx]);
-        }
-      }
-    }
-
-    quizEntries.shuffle();
-    int currentQuestionIndex = 0;
+    var _controller = TextEditingController();
 
     return WillPopScope(
       onWillPop: _onBackPressed,
@@ -60,7 +38,7 @@ class _QuizScreenState extends State<QuizScreen> {
                 ),
               ),
               Text(
-                quizEntries[currentQuestionIndex][0],
+                QuizTimeData.quizEntries[QuizTimeData.currentQuestionIndex][0],
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 72,
@@ -70,24 +48,79 @@ class _QuizScreenState extends State<QuizScreen> {
               Row(
                 children: [
                   Expanded(
-                    flex: 4,
+                    flex: 6,
                     child: TextField(
+                      controller: _controller,
                       decoration: InputDecoration(
                         hintText: 'Enter your answer',
                         labelText: 'Type Romaji equivalent',
+                        suffixIcon: IconButton(
+                          onPressed: () => _controller.clear(),
+                          icon: Icon(Icons.clear),
+                        ),
                       ),
+                      onChanged: (String userInput) {
+                        if (QuizTimeData.vowels.contains(
+                                userInput.substring(userInput.length - 1)) ||
+                            (userInput == 'n' &&
+                                QuizTimeData.quizEntries[
+                                        QuizTimeData.currentQuestionIndex][1] ==
+                                    'n')) {
+                          if (userInput ==
+                              QuizTimeData.quizEntries[
+                                  QuizTimeData.currentQuestionIndex][1]) {
+                            QuizTimeData.score++;
+                          } else {
+                            QuizTimeData.wrongAnswers.add([
+                              QuizTimeData.quizEntries[
+                                  QuizTimeData.currentQuestionIndex][0],
+                              QuizTimeData.quizEntries[
+                                  QuizTimeData.currentQuestionIndex][1],
+                              userInput,
+                            ]);
+                          }
+                          if (QuizTimeData.currentQuestionIndex <
+                              QuizTimeData.quizEntries.length - 1) {
+                            setState(() {
+                              QuizTimeData.currentQuestionIndex++;
+                              _controller.clear();
+                            });
+                          } else {
+                            Navigator.pop(context);
+                            Navigator.pushNamed(
+                              context,
+                              ResultScreen.routeName,
+                              arguments: ResultArguments(
+                                QuizTimeData.score,
+                                QuizTimeData.wrongAnswers,
+                              ),
+                            );
+                          }
+                          print(QuizTimeData.quizEntries);
+                        }
+                      },
                     ),
                   ),
                   SizedBox(
                     width: 15,
                   ),
                   Expanded(
-                    flex: 1,
+                    flex: 2,
                     child: RaisedButton(
-                      child: Icon(
-                        Icons.arrow_right_alt,
-                        color: Colors.white,
-                      ),
+                      child: Center(
+                          child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'SKIP',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          Icon(
+                            Icons.arrow_right_alt,
+                            color: Colors.white,
+                          ),
+                        ],
+                      )),
                       color: Colors.green[400],
                       onPressed: () => {/** */},
                     ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:Midori/screens/quiz_screen.dart';
+import 'package:Midori/quiz_time_data.dart' as QuizTimeData;
+import 'package:Midori/romaji_maps.dart';
 
 class CharSetDialog extends StatefulWidget {
   final int chosenCharSet;
@@ -97,13 +99,31 @@ class _CharSetDialogState extends State<CharSetDialog> {
                   onPressed: () {
                     print(_checked);
                     Navigator.pop(context, _checked);
+                    List<List<String>> quizEntries = List();
+
+                    if (chosenCharSet == 0) {
+                      // Hiragana
+                      for (int idx = 0; idx < 4; idx++) {
+                        if (_checked[idx] == true) {
+                          quizEntries.addAll(RomajiMaps.hiraganaMap[idx]);
+                        }
+                      }
+                    } else {
+                      // Katakana
+                      for (int idx = 0; idx < 4; idx++) {
+                        if (_checked[idx] == true) {
+                          quizEntries.addAll(RomajiMaps.hiraganaMap[idx]);
+                        }
+                      }
+                    }
+                    quizEntries.shuffle();
+                    QuizTimeData.quizEntries = quizEntries;
+                    QuizTimeData.currentQuestionIndex = 0;
+                    QuizTimeData.score = 0;
                     Navigator.pushNamed(
                       context,
                       QuizScreen.routeName,
-                      arguments: QuizArguments(
-                        chosenCharSet,
-                        _checked,
-                      ),
+                      arguments: QuizArguments(),
                     );
                   },
                 ),
