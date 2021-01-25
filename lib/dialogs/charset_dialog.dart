@@ -36,14 +36,11 @@ class _CharSetDialogState extends State<CharSetDialog> {
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
           child: Column(mainAxisSize: MainAxisSize.min, children: [
             Padding(
-                padding: EdgeInsets.symmetric(vertical: 10),
-                child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 15),
-                    child: Text(
-                      'Select the kana sets you want to practice:',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ))),
+                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                child: Text(
+                  'Select the kana sets you want to practice:',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                )),
             CheckboxListTile(
               title:
                   Text(charSet.elementAt(chosenCharSet).elementAt(0)['text']),
