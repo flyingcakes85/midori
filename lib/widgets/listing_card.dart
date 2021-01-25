@@ -5,8 +5,8 @@ import 'package:Midori/dialogs/charset_dialog.dart';
 class ListingCard extends StatelessWidget {
   final String titleText;
   final String subtitleText;
-  final String dialogClass;
-  ListingCard(this.titleText, this.subtitleText, this.dialogClass);
+  final int chosenCharSet;
+  ListingCard(this.titleText, this.subtitleText, this.chosenCharSet);
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -33,9 +33,7 @@ class ListingCard extends StatelessWidget {
                   showDialog(
                     context: context,
                     builder: (context) {
-                      return dialogClass == 'h'
-                          ? CharSetDialog(0) // 0 for Hiragana
-                          : CharSetDialog(1); // 1 for Katakana
+                      return CharSetDialog(chosenCharSet);
                     },
                   );
                 },
