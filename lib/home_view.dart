@@ -26,7 +26,7 @@ class _HomeViewState extends State<HomeView>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Midori'),
+        title: Text('緑 Midori'),
         elevation: 1,
         bottom: TabBar(
             controller: _tabController,
