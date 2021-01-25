@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:Midori/romaji_maps.dart';
 
 class QuizArguments {
   final List<bool> quizContents;
@@ -18,6 +19,28 @@ class _QuizScreenState extends State<QuizScreen> {
   @override
   Widget build(BuildContext context) {
     final QuizArguments args = ModalRoute.of(context).settings.arguments;
+
+    //Form the questions array here
+    List quizEntries = List();
+
+    if (args.chosenChar == 0) {
+      // Hiragana
+      for (int idx = 0; idx < 4; idx++) {
+        if (args.quizContents[idx] == true) {
+          quizEntries.addAll(RomajiMaps.hiraganaMap[idx]);
+        }
+      }
+    } else {
+      // Katakana
+      for (int idx = 0; idx < 4; idx++) {
+        if (args.quizContents[idx] == true) {
+          quizEntries.addAll(RomajiMaps.hiraganaMap[idx]);
+        }
+      }
+    }
+
+    quizEntries.shuffle();
+    print(quizEntries);
 
     return WillPopScope(
         onWillPop: _onBackPressed,
