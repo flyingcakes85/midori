@@ -8,8 +8,8 @@ class TestScreen extends StatelessWidget {
     return Container(
         padding: EdgeInsets.all(10),
         child: Column(children: [
-          ListingCard('Katakana', 'カタカナ', 'k'),
           ListingCard('Hiragana', 'ひらがな', 'h'),
+          ListingCard('Katakana', 'カタカナ', 'k'),
         ]));
   }
 }
