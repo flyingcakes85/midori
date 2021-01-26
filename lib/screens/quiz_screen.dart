@@ -70,6 +70,13 @@ class _QuizScreenState extends State<QuizScreen> {
                               QuizTimeData.quizEntries[
                                   QuizTimeData.currentQuestionIndex][1]) {
                             QuizTimeData.score++;
+                            QuizTimeData.rightAnswers.add([
+                              QuizTimeData.quizEntries[
+                                  QuizTimeData.currentQuestionIndex][0],
+                              QuizTimeData.quizEntries[
+                                  QuizTimeData.currentQuestionIndex][1],
+                              userInput,
+                            ]);
                           } else {
                             QuizTimeData.wrongAnswers.add([
                               QuizTimeData.quizEntries[
@@ -90,10 +97,7 @@ class _QuizScreenState extends State<QuizScreen> {
                             Navigator.pushNamed(
                               context,
                               ResultScreen.routeName,
-                              arguments: ResultArguments(
-                                QuizTimeData.score,
-                                QuizTimeData.wrongAnswers,
-                              ),
+                              arguments: ResultArguments(),
                             );
                           }
                           print(QuizTimeData.quizEntries);
@@ -122,7 +126,20 @@ class _QuizScreenState extends State<QuizScreen> {
                         ],
                       )),
                       color: Colors.green[400],
-                      onPressed: () => {/** */},
+                      onPressed: () => {
+                        setState(() {
+                          QuizTimeData.currentQuestionIndex++;
+                          _controller.clear();
+                        }),
+                        _controller.clear(),
+                        QuizTimeData.skippedAnswers.add([
+                          QuizTimeData.quizEntries[
+                              QuizTimeData.currentQuestionIndex][0],
+                          QuizTimeData.quizEntries[
+                              QuizTimeData.currentQuestionIndex][1],
+                          '-',
+                        ])
+                      },
                     ),
                   ),
                 ],
