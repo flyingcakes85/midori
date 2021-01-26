@@ -60,14 +60,9 @@ class AnswerListItem implements AnswerListSkel {
   }
 }
 
-class ResultScreen extends StatefulWidget {
+class ResultScreen extends StatelessWidget {
   static const routeName = '/resultscreen';
 
-  @override
-  _ResultScreenState createState() => _ResultScreenState();
-}
-
-class _ResultScreenState extends State<ResultScreen> {
   @override
   Widget build(BuildContext context) {
     final wrongItems = List<AnswerListItem>.generate(
