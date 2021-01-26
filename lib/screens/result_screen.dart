@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:Midori/quiz_time_data.dart';
 import 'package:Midori/quiz_time_data.dart' as QuizTimeData;
 
@@ -94,7 +95,30 @@ class ResultScreen extends StatelessWidget {
     final listItems = wrongItems + skippedItems + rightItems;
 
     // final ResultArguments args = ModalRoute.of(context).settings.arguments;
+    _saveStats() async {
+      final prefs = await SharedPreferences.getInstance();
+      int rightAns;
+      int wrongAns;
+      int skipped;
 
+      if (prefs.containsKey('rightAns')) {
+        rightAns = prefs.getInt('rightAns');
+      }
+      if (prefs.containsKey('wrongAns')) {
+        wrongAns = prefs.getInt('wrongAns');
+      }
+      if (prefs.containsKey('skipped')) {
+        skipped = prefs.getInt('skipped');
+      }
+      wrongAns += QuizTimeData.wrongAnswers.length;
+      rightAns += QuizTimeData.rightAnswers.length;
+      skipped += QuizTimeData.skippedAnswers.length;
+      prefs.setInt('rightAns', rightAns);
+      prefs.setInt('wrongAns', wrongAns);
+      prefs.setInt('skipped', skipped);
+    }
+
+    _saveStats();
     return Scaffold(
         appBar: AppBar(
           title: Text('Results!'),
