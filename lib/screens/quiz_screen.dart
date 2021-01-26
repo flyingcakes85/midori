@@ -16,7 +16,7 @@ class QuizScreen extends StatefulWidget {
 class _QuizScreenState extends State<QuizScreen> {
   @override
   Widget build(BuildContext context) {
-    //Form the questions array here
+    String lastAnswer;
 
     var _controller = TextEditingController();
 
@@ -50,6 +50,7 @@ class _QuizScreenState extends State<QuizScreen> {
                   Expanded(
                     flex: 6,
                     child: TextField(
+                      autofocus: true,
                       controller: _controller,
                       decoration: InputDecoration(
                         hintText: 'Enter your answer',
@@ -60,47 +61,59 @@ class _QuizScreenState extends State<QuizScreen> {
                         ),
                       ),
                       onChanged: (String userInput) {
-                        if (QuizTimeData.vowels.contains(
-                                userInput.substring(userInput.length - 1)) ||
-                            (userInput == 'n' &&
+                        if (userInput != '' && userInput != lastAnswer) {
+                          lastAnswer = userInput;
+                          if (QuizTimeData.vowels.contains(
+                                  userInput.substring(userInput.length - 1)) ||
+                              (userInput == 'n' &&
+                                  QuizTimeData.quizEntries[QuizTimeData
+                                          .currentQuestionIndex][1] ==
+                                      'n')) {
+                            if (userInput ==
                                 QuizTimeData.quizEntries[
-                                        QuizTimeData.currentQuestionIndex][1] ==
-                                    'n')) {
-                          if (userInput ==
-                              QuizTimeData.quizEntries[
-                                  QuizTimeData.currentQuestionIndex][1]) {
-                            QuizTimeData.score++;
-                            QuizTimeData.rightAnswers.add([
-                              QuizTimeData.quizEntries[
-                                  QuizTimeData.currentQuestionIndex][0],
-                              QuizTimeData.quizEntries[
-                                  QuizTimeData.currentQuestionIndex][1],
-                              userInput,
-                            ]);
-                          } else {
-                            QuizTimeData.wrongAnswers.add([
-                              QuizTimeData.quizEntries[
-                                  QuizTimeData.currentQuestionIndex][0],
-                              QuizTimeData.quizEntries[
-                                  QuizTimeData.currentQuestionIndex][1],
-                              userInput,
-                            ]);
+                                    QuizTimeData.currentQuestionIndex][1]) {
+                              QuizTimeData.score++;
+                              print('Treated Right');
+                              QuizTimeData.rightAnswers.add([
+                                QuizTimeData.quizEntries[
+                                    QuizTimeData.currentQuestionIndex][0],
+                                QuizTimeData.quizEntries[
+                                    QuizTimeData.currentQuestionIndex][1],
+                                userInput,
+                              ]);
+                            } else {
+                              print('Treated Wrong' +
+                                  ' ' +
+                                  QuizTimeData.quizEntries[
+                                      QuizTimeData.currentQuestionIndex][0] +
+                                  ' ' +
+                                  QuizTimeData.quizEntries[
+                                      QuizTimeData.currentQuestionIndex][1] +
+                                  ' ' +
+                                  userInput);
+                              QuizTimeData.wrongAnswers.add([
+                                QuizTimeData.quizEntries[
+                                    QuizTimeData.currentQuestionIndex][0],
+                                QuizTimeData.quizEntries[
+                                    QuizTimeData.currentQuestionIndex][1],
+                                userInput,
+                              ]);
+                            }
+                            if (QuizTimeData.currentQuestionIndex <
+                                QuizTimeData.quizEntries.length - 1) {
+                              setState(() {
+                                QuizTimeData.currentQuestionIndex++;
+                                _controller.clear();
+                              });
+                            } else {
+                              Navigator.pop(context);
+                              Navigator.pushNamed(
+                                context,
+                                ResultScreen.routeName,
+                                arguments: ResultArguments(),
+                              );
+                            }
                           }
-                          if (QuizTimeData.currentQuestionIndex <
-                              QuizTimeData.quizEntries.length - 1) {
-                            setState(() {
-                              QuizTimeData.currentQuestionIndex++;
-                              _controller.clear();
-                            });
-                          } else {
-                            Navigator.pop(context);
-                            Navigator.pushNamed(
-                              context,
-                              ResultScreen.routeName,
-                              arguments: ResultArguments(),
-                            );
-                          }
-                          print(QuizTimeData.quizEntries);
                         }
                       },
                     ),
