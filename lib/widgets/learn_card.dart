@@ -37,7 +37,7 @@ class LearnCard extends StatelessWidget {
               TextButton(
                 child: const Text('OPEN IN BROWSER'),
                 onPressed: () {
-                  /** */
+                  launchURL(url);
                 },
               ),
               const SizedBox(width: 8),
