@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:Midori/screens/learn_screen.dart';
 import 'package:Midori/screens/stats_screen.dart';
 import 'package:Midori/screens/test_screen.dart';
+import 'package:Midori/screens/about_screen.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -45,7 +46,17 @@ class _HomeViewState extends State<HomeView>
                 text: 'STATS',
               ),
             ]),
-        actions: <Widget>[Icon(Icons.more_vert)],
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.more_vert),
+            onPressed: () => {
+              Navigator.pushNamed(
+                context,
+                AboutScreen.routeName,
+              )
+            },
+          )
+        ],
       ),
       body: TabBarView(
         controller: _tabController,
