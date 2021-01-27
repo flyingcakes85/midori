@@ -46,7 +46,7 @@ flutter run
  - Advertising
  - In-app purchases to unlock features
 
-## Contribue
+## Contribute
 
 Contributions in form of pull requests, posting issues, or feature requests are highly appreciated. If you want to work on adding a feature, please first create an issue describing the feature you want to add and how it will be beneficial to the end-user. Ensure that the features you want to add respects user's privacy and freedom.
 
