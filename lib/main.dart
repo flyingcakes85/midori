@@ -19,6 +19,7 @@ import 'package:Midori/home_view.dart';
 import 'package:Midori/screens/quiz_screen.dart';
 import 'package:Midori/screens/result_screen.dart';
 import 'package:Midori/screens/about_screen.dart';
+import 'package:Midori/screens/license_screen.dart';
 
 void main() => runApp(Midori());
 
@@ -38,6 +39,7 @@ class Midori extends StatelessWidget {
         QuizScreen.routeName: (context) => QuizScreen(),
         ResultScreen.routeName: (context) => ResultScreen(),
         AboutScreen.routeName: (context) => AboutScreen(),
+        LicenseScreen.routeName: (context) => LicenseScreen(),
       },
     );
   }

@@ -16,7 +16,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:Midori/screens/license_screen.dart';
 
 launchURL(String url) async {
   if (await canLaunch(url)) {
@@ -26,58 +26,80 @@ launchURL(String url) async {
   }
 }
 
-class AboutScreen extends StatefulWidget {
+class AboutScreen extends StatelessWidget {
   static const routeName = '/about_screen';
-  @override
-  _AboutScreenState createState() => _AboutScreenState();
-}
-
-class _AboutScreenState extends State<AboutScreen> {
-  Future<String> getFileData(String path) async {
-    return await rootBundle.loadString(path);
-  }
-
-  String _licenseText = 'License Text';
-
-  _fetchLicense() async {
-    String s = await getFileData('lib/assets/license.txt');
-    setState(() {
-      _licenseText = s;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    _fetchLicense();
     return Scaffold(
       appBar: AppBar(
+        elevation: 3,
         title: Text('About'),
       ),
       body: Padding(
-          padding: EdgeInsets.all(15),
-          child: SingleChildScrollView(
-              child: Column(children: [
-            Text('Developed by'),
-            SizedBox(height: 5),
-            Text(
-              'Snehit Sah',
-              style: TextStyle(
-                  color: Colors.green,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 48),
-            ),
-            SizedBox(height: 10),
-            RaisedButton(
-              child: Text('SOURCE CODE ON GITHUB'),
-              onPressed: () => launchURL('https://github.com/snehitsah/midori'),
+        padding: EdgeInsets.all(15),
+        child: Column(
+          children: [
+            Card(
+              elevation: 2,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  ListTile(
+                    leading: Icon(Icons.person),
+                    title: Text(
+                      'DEVELOPED BY',
+                      style: TextStyle(fontSize: 14, color: Colors.grey),
+                    ),
+                    subtitle: Text(
+                      'Snehit Sah',
+                      style: TextStyle(fontSize: 26, color: Colors.green),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      TextButton(
+                        child: const Text('VIEW GITHUB PROFILE'),
+                        onPressed: () {
+                          launchURL('https://github.com/snehitsah');
+                        },
+                      ),
+                      const SizedBox(width: 8),
+                    ],
+                  ),
+                ],
+              ),
             ),
             SizedBox(height: 20),
-            Text(
-              'License Text',
-              style: TextStyle(fontSize: 24),
-            ),
-            Text(_licenseText),
-          ]))),
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Expanded(
+                    flex: 1,
+                    child: RaisedButton(
+                      elevation: 2,
+                      child: Text('VIEW SOURCE CODE',
+                          style: TextStyle(color: Colors.white)),
+                      color: Colors.green[400],
+                      onPressed: () =>
+                          launchURL('https://github.com/snehitsah/midori'),
+                    )),
+                SizedBox(width: 15),
+                Expanded(
+                    child: RaisedButton(
+                  elevation: 2,
+                  child: Text('VIEW LICENSE',
+                      style: TextStyle(color: Colors.white)),
+                  color: Colors.green[400],
+                  onPressed: () =>
+                      Navigator.pushNamed(context, LicenseScreen.routeName),
+                ))
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
 }

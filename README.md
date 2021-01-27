@@ -34,7 +34,7 @@ flutter run
 ## To-Do
  - Let users view character-sets inside the application
  - Re-write the Stats screen to include pie-graph
- - Re-write about page to make it look better
+ - <s>Re-write about page to make it look better</s>
  - Support for words in quiz
  - Publish this app
  - Long term : Make it an interactive app to learn Kana and track your progress
