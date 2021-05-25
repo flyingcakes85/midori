@@ -114,7 +114,7 @@ class _CharSetDialogState extends State<CharSetDialog> {
                   onPressed: () {
                     print(_checked);
                     Navigator.pop(context, _checked);
-                    List<List<String>> quizEntries = List();
+                    List<List<String>> quizEntries = [];
 
                     if (chosenCharSet == 0) {
                       // Hiragana

@@ -138,7 +138,9 @@ class _QuizScreenState extends State<QuizScreen> {
                   ),
                   Expanded(
                     flex: 2,
-                    child: RaisedButton(
+                    child: ElevatedButton(
+                      style:
+                          ElevatedButton.styleFrom(primary: Colors.green[400]),
                       child: Center(
                           child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -153,7 +155,6 @@ class _QuizScreenState extends State<QuizScreen> {
                           ),
                         ],
                       )),
-                      color: Colors.green[400],
                       onPressed: () => {
                         setState(() {
                           QuizTimeData.currentQuestionIndex++;
