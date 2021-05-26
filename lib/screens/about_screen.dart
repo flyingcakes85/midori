@@ -16,7 +16,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:get/get.dart';
+
 import 'package:Midori/screens/license_screen.dart';
+import 'package:Midori/screens/donate_screen.dart';
 
 launchURL(String url) async {
   if (await canLaunch(url)) {
@@ -76,26 +79,55 @@ class AboutScreen extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Expanded(
-                    flex: 1,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          elevation: 2, primary: Colors.green),
-                      child: Text('VIEW SOURCE CODE',
-                          style: TextStyle(color: Colors.white)),
-                      onPressed: () =>
-                          launchURL('https://github.com/flyingcakes85/midori'),
-                    )),
+                  flex: 1,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        elevation: 2, primary: Colors.green),
+                    child: Text('VIEW SOURCE CODE',
+                        style: TextStyle(color: Colors.white)),
+                    onPressed: () =>
+                        launchURL('https://github.com/flyingcakes85/midori'),
+                  ),
+                ),
                 SizedBox(width: 15),
                 Expanded(
-                    child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      elevation: 2, primary: Colors.green[400]),
-                  child: Text('VIEW LICENSE',
-                      style: TextStyle(color: Colors.white)),
-                  onPressed: () =>
-                      Navigator.pushNamed(context, LicenseScreen.routeName),
-                ))
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        elevation: 2, primary: Colors.green[400]),
+                    child: Text('VIEW LICENSE',
+                        style: TextStyle(color: Colors.white)),
+                    onPressed: () =>
+                        Navigator.pushNamed(context, LicenseScreen.routeName),
+                  ),
+                )
               ],
+            ),
+            SizedBox(height: 12),
+            Padding(
+              padding: EdgeInsets.all(12),
+              child: Text(
+                "I am a CS student learning how to code. Most of my work is released as open source, and I do not add advertising in my software.\n\nIf you like my work, please consider donating.",
+                style: TextStyle(fontSize: 16),
+              ),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                elevation: 4,
+                primary: Colors.green,
+              ),
+              onPressed: () => Get.to(DonateScreen()),
+              child: Padding(
+                padding: EdgeInsets.all(2),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.favorite_outline),
+                    SizedBox(width: 6),
+                    Text("DONATE")
+                  ],
+                ),
+              ),
             )
           ],
         ),
