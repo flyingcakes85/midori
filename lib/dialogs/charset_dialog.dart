@@ -127,7 +127,7 @@ class _CharSetDialogState extends State<CharSetDialog> {
                       // Katakana
                       for (int idx = 0; idx < 4; idx++) {
                         if (_checked[idx] == true) {
-                          quizEntries.addAll(RomajiMaps.hiraganaMap[idx]);
+                          quizEntries.addAll(RomajiMaps.katakanaMap[idx]);
                         }
                       }
                     }

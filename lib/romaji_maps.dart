@@ -20,7 +20,7 @@ class RomajiMaps {
   // 1 -> Next 25 Kana (は/ハ/ha -> を/ヲ/wo + ん/ノ/n)
   // 2 -> Dakuten Kana (が/ガ/ga -> ぽ/ポ/po)
   // 3 -> Combo Kana (きゃ/キャ/kya -> ぴょ/ピョ/pyo)
-  static var hiraganaMap = [
+  static const hiraganaMap = [
     [
       ['あ', 'a'],
       ['い', 'i'],
@@ -137,7 +137,7 @@ class RomajiMaps {
       ['ぴょ', 'pyo'],
     ]
   ];
-  var katakanaMap = [
+  static const katakanaMap = [
     [
       ['ア', 'a'],
       ['イ', 'i'],
