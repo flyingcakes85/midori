@@ -77,21 +77,21 @@ class AboutScreen extends StatelessWidget {
               children: [
                 Expanded(
                     flex: 1,
-                    child: RaisedButton(
-                      elevation: 2,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          elevation: 2, primary: Colors.green),
                       child: Text('VIEW SOURCE CODE',
                           style: TextStyle(color: Colors.white)),
-                      color: Colors.green[400],
                       onPressed: () =>
                           launchURL('https://github.com/snehitsah/midori'),
                     )),
                 SizedBox(width: 15),
                 Expanded(
-                    child: RaisedButton(
-                  elevation: 2,
+                    child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      elevation: 2, primary: Colors.green[400]),
                   child: Text('VIEW LICENSE',
                       style: TextStyle(color: Colors.white)),
-                  color: Colors.green[400],
                   onPressed: () =>
                       Navigator.pushNamed(context, LicenseScreen.routeName),
                 ))
