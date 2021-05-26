@@ -62,7 +62,7 @@ class AboutScreen extends StatelessWidget {
                       TextButton(
                         child: const Text('VIEW GITHUB PROFILE'),
                         onPressed: () {
-                          launchURL('https://github.com/snehitsah');
+                          launchURL('https://github.com/flyingcakes85');
                         },
                       ),
                       const SizedBox(width: 8),
@@ -83,7 +83,7 @@ class AboutScreen extends StatelessWidget {
                       child: Text('VIEW SOURCE CODE',
                           style: TextStyle(color: Colors.white)),
                       onPressed: () =>
-                          launchURL('https://github.com/snehitsah/midori'),
+                          launchURL('https://github.com/flyingcakes85/midori'),
                     )),
                 SizedBox(width: 15),
                 Expanded(
