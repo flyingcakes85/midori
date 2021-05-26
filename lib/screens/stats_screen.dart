@@ -15,6 +15,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:pie_chart/pie_chart.dart';
 
 class StatsScreen extends StatefulWidget {
   @override
@@ -31,6 +32,8 @@ class _StatsScreenState extends State<StatsScreen> {
   TextStyle numberDisplay =
       TextStyle(fontWeight: FontWeight.bold, fontSize: 48);
 
+  Map<String, double> dataMap;
+
   @override
   Widget build(BuildContext context) {
     _getStats() async {
@@ -46,6 +49,12 @@ class _StatsScreenState extends State<StatsScreen> {
         _skipped = (prefs.read('skipped') ?? 0);
         prefs.write('skipped', _skipped);
       });
+
+      dataMap = {
+        "Correct": _rightAns.toDouble(),
+        "Wrong": _wrongAns.toDouble(),
+        "Skipped": _skipped.toDouble(),
+      };
     }
 
     _getStats();
@@ -54,26 +63,31 @@ class _StatsScreenState extends State<StatsScreen> {
       padding: EdgeInsets.only(top: 50),
       child: Column(
         children: [
-          Expanded(
-            flex: 1,
-            child: Column(children: [
-              Text(_rightAns.toString(), style: numberDisplay),
-              Text('Correct'),
-            ]),
-          ),
-          Expanded(
-            flex: 1,
-            child: Column(children: [
-              Text(_wrongAns.toString(), style: numberDisplay),
-              Text('Wrong'),
-            ]),
-          ),
-          Expanded(
-            flex: 1,
-            child: Column(children: [
-              Text(_skipped.toString(), style: numberDisplay),
-              Text('Skipped'),
-            ]),
+          PieChart(
+            dataMap: dataMap,
+            animationDuration: Duration(milliseconds: 800),
+            chartLegendSpacing: 32,
+            chartRadius: MediaQuery.of(context).size.width / 3.2,
+            colorList: [Colors.green, Colors.red, Colors.amber],
+            initialAngleInDegree: 0,
+            chartType: ChartType.ring,
+            ringStrokeWidth: 32,
+            legendOptions: LegendOptions(
+              showLegendsInRow: false,
+              legendPosition: LegendPosition.bottom,
+              showLegends: true,
+              legendShape: BoxShape.circle,
+              legendTextStyle: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            chartValuesOptions: ChartValuesOptions(
+              showChartValueBackground: true,
+              showChartValues: true,
+              showChartValuesInPercentage: false,
+              showChartValuesOutside: false,
+              decimalPlaces: 0,
+            ),
           )
         ],
       ),
