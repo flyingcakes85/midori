@@ -14,11 +14,13 @@
 //     along with Midori.  If not, see <https://www.gnu.org/licenses/>.
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:Midori/screens/learn_screen.dart';
 import 'package:Midori/screens/stats_screen.dart';
 import 'package:Midori/screens/test_screen.dart';
 import 'package:Midori/screens/about_screen.dart';
+import 'package:Midori/consts.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -80,6 +82,13 @@ class _HomeViewState extends State<HomeView>
           TestScreen(),
           StatsScreen(),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.brightness_5),
+        onPressed: () {
+          Get.changeTheme(
+              Get.isDarkMode ? Consts.lightTheme : Consts.darkTheme);
+        },
       ),
     );
   }

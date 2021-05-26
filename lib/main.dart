@@ -14,12 +14,14 @@
 //     along with Midori.  If not, see <https://www.gnu.org/licenses/>.
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:Midori/home_view.dart';
 import 'package:Midori/screens/quiz_screen.dart';
 import 'package:Midori/screens/result_screen.dart';
 import 'package:Midori/screens/about_screen.dart';
 import 'package:Midori/screens/license_screen.dart';
+import 'package:Midori/consts.dart';
 
 void main() => runApp(Midori());
 
@@ -27,12 +29,9 @@ class Midori extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Midori',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+      theme: Consts.lightTheme,
       home: HomeView(),
       debugShowCheckedModeBanner: false,
       routes: {
