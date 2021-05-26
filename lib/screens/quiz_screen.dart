@@ -29,6 +29,8 @@ class QuizScreen extends StatefulWidget {
 }
 
 class _QuizScreenState extends State<QuizScreen> {
+  bool isRight = false;
+  bool isWrong = false;
   @override
   Widget build(BuildContext context) {
     String lastAnswer;
@@ -59,11 +61,29 @@ class _QuizScreenState extends State<QuizScreen> {
                   fontSize: 72,
                 ),
               ),
-              Expanded(child: Container()),
+              Expanded(
+                  child: Stack(
+                children: [
+                  Visibility(
+                    child: Icon(
+                      Icons.check,
+                      color: Colors.green,
+                    ),
+                    visible: isRight,
+                  ),
+                  Visibility(
+                    child: Icon(
+                      Icons.close,
+                      color: Colors.red,
+                    ),
+                    visible: isWrong,
+                  ),
+                ],
+              )),
               Row(
                 children: [
                   Expanded(
-                    flex: 6,
+                    flex: 5,
                     child: TextField(
                       autofocus: true,
                       controller: _controller,
@@ -88,7 +108,15 @@ class _QuizScreenState extends State<QuizScreen> {
                                 QuizTimeData.quizEntries[
                                     QuizTimeData.currentQuestionIndex][1]) {
                               QuizTimeData.score++;
-                              print('Treated Right');
+                              print("Treated Right");
+                              setState(() {
+                                isRight = true;
+                              });
+                              Future.delayed(Duration(milliseconds: 500), () {
+                                setState(() {
+                                  isRight = false;
+                                });
+                              });
                               QuizTimeData.rightAnswers.add([
                                 QuizTimeData.quizEntries[
                                     QuizTimeData.currentQuestionIndex][0],
@@ -97,15 +125,23 @@ class _QuizScreenState extends State<QuizScreen> {
                                 userInput,
                               ]);
                             } else {
-                              print('Treated Wrong' +
-                                  ' ' +
-                                  QuizTimeData.quizEntries[
-                                      QuizTimeData.currentQuestionIndex][0] +
-                                  ' ' +
-                                  QuizTimeData.quizEntries[
-                                      QuizTimeData.currentQuestionIndex][1] +
-                                  ' ' +
-                                  userInput);
+                              setState(() {
+                                isWrong = true;
+                              });
+                              Future.delayed(Duration(milliseconds: 500), () {
+                                setState(() {
+                                  isWrong = false;
+                                });
+                              });
+                              //   print('Treated Wrong' +
+                              //       ' ' +
+                              //       QuizTimeData.quizEntries[
+                              //           QuizTimeData.currentQuestionIndex][0] +
+                              //       ' ' +
+                              //       QuizTimeData.quizEntries[
+                              //           QuizTimeData.currentQuestionIndex][1] +
+                              //       ' ' +
+                              //       userInput);
                               QuizTimeData.wrongAnswers.add([
                                 QuizTimeData.quizEntries[
                                     QuizTimeData.currentQuestionIndex][0],
