@@ -70,15 +70,17 @@ class _HomeViewState extends State<HomeView>
               ),
             ]),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.more_vert),
-            onPressed: () => {
-              Navigator.pushNamed(
-                context,
-                AboutScreen.routeName,
-              )
+          PopupMenuButton<String>(
+            onSelected: handleClick,
+            itemBuilder: (BuildContext context) {
+              return {'Donate', 'About'}.map((String choice) {
+                return PopupMenuItem<String>(
+                  value: choice,
+                  child: Text(choice),
+                );
+              }).toList();
             },
-          )
+          ),
         ],
       ),
       body: TabBarView(
@@ -101,5 +103,17 @@ class _HomeViewState extends State<HomeView>
         },
       ),
     );
+  }
+
+  void handleClick(String value) {
+    switch (value) {
+      case 'Donate':
+        break;
+      case 'About':
+        Navigator.pushNamed(
+          context,
+          AboutScreen.routeName,
+        );
+    }
   }
 }
