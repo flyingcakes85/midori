@@ -41,13 +41,10 @@ class _StatsScreenState extends State<StatsScreen> {
       if (!mounted) return;
       setState(() {
         _rightAns = (prefs.read('rightAns') ?? 0);
-        prefs.write('rightAns', _rightAns);
 
         _wrongAns = (prefs.read('wrongAns') ?? 0);
-        prefs.write('wrongAns', _wrongAns);
 
         _skipped = (prefs.read('skipped') ?? 0);
-        prefs.write('skipped', _skipped);
       });
 
       dataMap = {
