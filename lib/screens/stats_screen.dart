@@ -35,15 +35,14 @@ class _StatsScreenState extends State<StatsScreen> {
   Widget build(BuildContext context) {
     _getStats() async {
       final prefs = await SharedPreferences.getInstance();
+      if (!mounted) return;
       setState(() {
         _rightAns = (prefs.getInt('rightAns') ?? 0);
         prefs.setInt('rightAns', _rightAns);
-      });
-      setState(() {
+
         _wrongAns = (prefs.getInt('wrongAns') ?? 0);
         prefs.setInt('wrongAns', _wrongAns);
-      });
-      setState(() {
+
         _skipped = (prefs.getInt('skipped') ?? 0);
         prefs.setInt('skipped', _skipped);
       });
