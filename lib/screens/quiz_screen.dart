@@ -62,150 +62,19 @@ class _QuizScreenState extends State<QuizScreen> {
                 ),
               ),
               Expanded(
-                  child: Stack(
-                children: [
-                  Visibility(
-                    child: Icon(
-                      Icons.check,
-                      color: Colors.green,
-                    ),
-                    visible: isRight,
-                  ),
-                  Visibility(
-                    child: Icon(
-                      Icons.close,
-                      color: Colors.red,
-                    ),
-                    visible: isWrong,
-                  ),
-                ],
-              )),
+                  child: FeedbackIcons(isRight: isRight, isWrong: isWrong)),
               Row(
                 children: [
                   Expanded(
                     flex: 5,
-                    child: TextField(
-                      autofocus: true,
-                      controller: _controller,
-                      decoration: InputDecoration(
-                        hintText: 'Enter your answer',
-                        labelText: 'Type Romaji equivalent',
-                        suffixIcon: IconButton(
-                          onPressed: () => _controller.clear(),
-                          icon: Icon(Icons.clear),
-                        ),
-                      ),
-                      onChanged: (String userInput) {
-                        if (userInput != '' && userInput != lastAnswer) {
-                          lastAnswer = userInput;
-                          if (QuizTimeData.vowels.contains(
-                                  userInput.substring(userInput.length - 1)) ||
-                              (userInput == 'n' &&
-                                  QuizTimeData.quizEntries[QuizTimeData
-                                          .currentQuestionIndex][1] ==
-                                      'n')) {
-                            if (userInput ==
-                                QuizTimeData.quizEntries[
-                                    QuizTimeData.currentQuestionIndex][1]) {
-                              QuizTimeData.score++;
-                              print("Treated Right");
-                              setState(() {
-                                isRight = true;
-                              });
-                              Future.delayed(Duration(milliseconds: 500), () {
-                                setState(() {
-                                  isRight = false;
-                                });
-                              });
-                              QuizTimeData.rightAnswers.add([
-                                QuizTimeData.quizEntries[
-                                    QuizTimeData.currentQuestionIndex][0],
-                                QuizTimeData.quizEntries[
-                                    QuizTimeData.currentQuestionIndex][1],
-                                userInput,
-                              ]);
-                            } else {
-                              setState(() {
-                                isWrong = true;
-                              });
-                              Future.delayed(Duration(milliseconds: 500), () {
-                                setState(() {
-                                  isWrong = false;
-                                });
-                              });
-                              //   print('Treated Wrong' +
-                              //       ' ' +
-                              //       QuizTimeData.quizEntries[
-                              //           QuizTimeData.currentQuestionIndex][0] +
-                              //       ' ' +
-                              //       QuizTimeData.quizEntries[
-                              //           QuizTimeData.currentQuestionIndex][1] +
-                              //       ' ' +
-                              //       userInput);
-                              QuizTimeData.wrongAnswers.add([
-                                QuizTimeData.quizEntries[
-                                    QuizTimeData.currentQuestionIndex][0],
-                                QuizTimeData.quizEntries[
-                                    QuizTimeData.currentQuestionIndex][1],
-                                userInput,
-                              ]);
-                            }
-                            if (QuizTimeData.currentQuestionIndex <
-                                QuizTimeData.quizEntries.length - 1) {
-                              setState(() {
-                                QuizTimeData.currentQuestionIndex++;
-                                _controller.clear();
-                              });
-                            } else {
-                              Navigator.pop(context);
-                              Navigator.pushNamed(
-                                context,
-                                ResultScreen.routeName,
-                                arguments: ResultArguments(),
-                              );
-                            }
-                          }
-                        }
-                      },
-                    ),
+                    child: buildAnswerBox(_controller, lastAnswer, context),
                   ),
                   SizedBox(
                     width: 15,
                   ),
                   Expanded(
                     flex: 2,
-                    child: ElevatedButton(
-                      style:
-                          ElevatedButton.styleFrom(primary: Colors.green[400]),
-                      child: Center(
-                          child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'SKIP',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          Icon(
-                            Icons.arrow_right_alt,
-                            color: Colors.white,
-                          ),
-                        ],
-                      )),
-                      onPressed: () => {
-                        setState(() {
-                          QuizTimeData.currentQuestionIndex++;
-                          _controller.clear();
-                        }),
-                        _controller.clear(),
-                        QuizTimeData.skippedAnswers.add([
-                          QuizTimeData.quizEntries[
-                              QuizTimeData.currentQuestionIndex][0],
-                          QuizTimeData.quizEntries[
-                              QuizTimeData.currentQuestionIndex][1],
-                          '-',
-                        ])
-                      },
-                    ),
+                    child: buildSkipButton(_controller),
                   ),
                 ],
               ),
@@ -214,6 +83,123 @@ class _QuizScreenState extends State<QuizScreen> {
         ),
       ),
     );
+  }
+
+  TextField buildAnswerBox(TextEditingController _controller, String lastAnswer,
+      BuildContext context) {
+    return TextField(
+      autofocus: true,
+      controller: _controller,
+      decoration: InputDecoration(
+        hintText: 'Enter your answer',
+        labelText: 'Type Romaji equivalent',
+        suffixIcon: IconButton(
+          onPressed: () => _controller.clear(),
+          icon: Icon(Icons.clear),
+        ),
+      ),
+      onChanged: (String userInput) =>
+          checkInput(userInput, lastAnswer, _controller, context),
+    );
+  }
+
+  void checkInput(String userInput, String lastAnswer,
+      TextEditingController _controller, BuildContext context) {
+    if (userInput != '' && userInput != lastAnswer) {
+      lastAnswer = userInput;
+      if (QuizTimeData.vowels
+              .contains(userInput.substring(userInput.length - 1)) ||
+          (userInput == 'n' &&
+              QuizTimeData.quizEntries[QuizTimeData.currentQuestionIndex][1] ==
+                  'n')) {
+        if (userInput ==
+            QuizTimeData.quizEntries[QuizTimeData.currentQuestionIndex][1]) {
+          QuizTimeData.score++;
+          showIconFeedBack(true);
+          QuizTimeData.rightAnswers.add([
+            QuizTimeData.quizEntries[QuizTimeData.currentQuestionIndex][0],
+            QuizTimeData.quizEntries[QuizTimeData.currentQuestionIndex][1],
+            userInput,
+          ]);
+        } else {
+          showIconFeedBack(false);
+
+          QuizTimeData.wrongAnswers.add([
+            QuizTimeData.quizEntries[QuizTimeData.currentQuestionIndex][0],
+            QuizTimeData.quizEntries[QuizTimeData.currentQuestionIndex][1],
+            userInput,
+          ]);
+        }
+        redirectOrClearText(_controller, context);
+      }
+    }
+  }
+
+  void redirectOrClearText(
+      TextEditingController _controller, BuildContext context) {
+    if (QuizTimeData.currentQuestionIndex <
+        QuizTimeData.quizEntries.length - 1) {
+      setState(() {
+        QuizTimeData.currentQuestionIndex++;
+        _controller.clear();
+      });
+    } else {
+      Navigator.pop(context);
+      Navigator.pushNamed(
+        context,
+        ResultScreen.routeName,
+        arguments: ResultArguments(),
+      );
+    }
+  }
+
+  void showIconFeedBack(bool answerTruth) {
+    setState(() {
+      if (answerTruth)
+        isRight = true;
+      else
+        isWrong = true;
+    });
+    Future.delayed(Duration(milliseconds: 500), () {
+      setState(() {
+        if (answerTruth)
+          isRight = false;
+        else
+          isWrong = false;
+      });
+    });
+  }
+
+  ElevatedButton buildSkipButton(TextEditingController _controller) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(primary: Colors.green[400]),
+      child: Center(
+          child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'SKIP',
+            style: TextStyle(color: Colors.white),
+          ),
+          Icon(
+            Icons.arrow_right_alt,
+            color: Colors.white,
+          ),
+        ],
+      )),
+      onPressed: () => onPressSkip(_controller),
+    );
+  }
+
+  Set<void> onPressSkip(TextEditingController _controller) {
+    return {
+      QuizTimeData.skippedAnswers.add([
+        QuizTimeData.quizEntries[QuizTimeData.currentQuestionIndex][0],
+        QuizTimeData.quizEntries[QuizTimeData.currentQuestionIndex][1],
+        '-',
+      ]),
+      redirectOrClearText(_controller, context),
+    };
   }
 
   Future<bool> _onBackPressed() {
@@ -238,5 +224,38 @@ class _QuizScreenState extends State<QuizScreen> {
           ),
         ) ??
         false;
+  }
+}
+
+class FeedbackIcons extends StatelessWidget {
+  const FeedbackIcons({
+    Key key,
+    @required this.isRight,
+    @required this.isWrong,
+  }) : super(key: key);
+
+  final bool isRight;
+  final bool isWrong;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Visibility(
+          child: Icon(
+            Icons.check,
+            color: Colors.green,
+          ),
+          visible: isRight,
+        ),
+        Visibility(
+          child: Icon(
+            Icons.close,
+            color: Colors.red,
+          ),
+          visible: isWrong,
+        ),
+      ],
+    );
   }
 }

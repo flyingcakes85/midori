@@ -29,13 +29,13 @@ class _CharSetDialogState extends State<CharSetDialog> {
   var charSet = {
     {
       {'lead': '25', 'text': 'First 25 Hiragana\nあ - な'},
-      {'lead': '20', 'text': 'Next 20 Hiragana\nは - を'},
+      {'lead': '20', 'text': 'Next 21 Hiragana\nは - を'},
       {'lead': '25', 'text': 'Dakuten Kana\nが - ぽ'},
       {'lead': '36', 'text': 'Combo Hiragana\nきゃ - ぴょ'}
     },
     {
       {'lead': '25', 'text': 'First 25 Katakana\nア - ノ'},
-      {'lead': '20', 'text': 'Next 20 Katakana\nハ - ヲ'},
+      {'lead': '20', 'text': 'Next 21 Katakana\nハ - ヲ'},
       {'lead': '25', 'text': 'Dakuten Kana\nガ - ポ'},
       {'lead': '36', 'text': 'Combo Katakana\nキャ - ピョ'}
     }
