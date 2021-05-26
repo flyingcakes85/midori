@@ -112,19 +112,24 @@ class ResultScreen extends StatelessWidget {
     // final ResultArguments args = ModalRoute.of(context).settings.arguments;
     _saveStats() async {
       final prefs = GetStorage();
-      int rightAns = 0;
-      int wrongAns = 0;
-      int skipped = 0;
+      // int rightAns = 0;
+      // int wrongAns = 0;
+      // int skipped = 0;
 
-      if (prefs.hasData('rightAns')) {
-        rightAns = prefs.read('rightAns');
-      }
-      if (prefs.hasData('wrongAns')) {
-        wrongAns = prefs.read('wrongAns');
-      }
-      if (prefs.hasData('skipped')) {
-        skipped = prefs.read('skipped');
-      }
+      // if (prefs.hasData('rightAns')) {
+      //   rightAns = prefs.read('rightAns');
+      // }
+      // if (prefs.hasData('wrongAns')) {
+      //   wrongAns = prefs.read('wrongAns');
+      // }
+      // if (prefs.hasData('skipped')) {
+      //   skipped = prefs.read('skipped');
+      // }
+
+      int rightAns = (prefs.read("rightAns") ?? 0);
+      int wrongAns = (prefs.read("wrongAns") ?? 0);
+      int skipped = (prefs.read("skipped") ?? 0);
+
       wrongAns += QuizTimeData.wrongAnswers.length;
       rightAns += QuizTimeData.rightAnswers.length;
       skipped += QuizTimeData.skippedAnswers.length;

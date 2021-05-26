@@ -15,6 +15,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import 'package:Midori/home_view.dart';
 import 'package:Midori/screens/quiz_screen.dart';
@@ -23,15 +24,21 @@ import 'package:Midori/screens/about_screen.dart';
 import 'package:Midori/screens/license_screen.dart';
 import 'package:Midori/consts.dart';
 
-void main() => runApp(Midori());
+void main() async {
+  await GetStorage.init();
+  runApp(Midori());
+}
 
 class Midori extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final bool isDarkThemeEnabled =
+        (GetStorage().read("isDarkModeEnabled") ?? false);
+
     return GetMaterialApp(
       title: 'Midori',
-      theme: Consts.lightTheme,
+      theme: isDarkThemeEnabled ? Consts.darkTheme : Consts.lightTheme,
       home: HomeView(),
       debugShowCheckedModeBanner: false,
       routes: {

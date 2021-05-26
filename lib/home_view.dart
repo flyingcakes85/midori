@@ -15,6 +15,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import 'package:Midori/screens/learn_screen.dart';
 import 'package:Midori/screens/stats_screen.dart';
@@ -30,6 +31,9 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
+  bool isDarkModeEnabled = false;
+
+  final prefs = GetStorage();
   @override
   void initState() {
     super.initState();
@@ -38,6 +42,8 @@ class _HomeViewState extends State<HomeView>
       initialIndex: 1,
       length: 3,
     );
+
+    isDarkModeEnabled = (GetStorage().read("isDarkModeEnabled") ?? false);
   }
 
   @override
@@ -84,10 +90,14 @@ class _HomeViewState extends State<HomeView>
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.brightness_5),
+        child: Icon(Icons.brightness_4_sharp),
         onPressed: () {
           Get.changeTheme(
               Get.isDarkMode ? Consts.lightTheme : Consts.darkTheme);
+          setState(() {
+            isDarkModeEnabled = Get.isDarkMode;
+          });
+          prefs.write("isDarkModeEnabled", !isDarkModeEnabled);
         },
       ),
     );
