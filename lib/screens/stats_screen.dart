@@ -14,7 +14,7 @@
 //     along with Midori.  If not, see <https://www.gnu.org/licenses/>.
 
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get_storage/get_storage.dart';
 
 class StatsScreen extends StatefulWidget {
   @override
@@ -34,17 +34,17 @@ class _StatsScreenState extends State<StatsScreen> {
   @override
   Widget build(BuildContext context) {
     _getStats() async {
-      final prefs = await SharedPreferences.getInstance();
+      final prefs = GetStorage();
       if (!mounted) return;
       setState(() {
-        _rightAns = (prefs.getInt('rightAns') ?? 0);
-        prefs.setInt('rightAns', _rightAns);
+        _rightAns = (prefs.read('rightAns') ?? 0);
+        prefs.write('rightAns', _rightAns);
 
-        _wrongAns = (prefs.getInt('wrongAns') ?? 0);
-        prefs.setInt('wrongAns', _wrongAns);
+        _wrongAns = (prefs.read('wrongAns') ?? 0);
+        prefs.write('wrongAns', _wrongAns);
 
-        _skipped = (prefs.getInt('skipped') ?? 0);
-        prefs.setInt('skipped', _skipped);
+        _skipped = (prefs.read('skipped') ?? 0);
+        prefs.write('skipped', _skipped);
       });
     }
 

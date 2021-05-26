@@ -14,7 +14,8 @@
 //     along with Midori.  If not, see <https://www.gnu.org/licenses/>.
 
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get_storage/get_storage.dart';
+
 import 'package:Midori/quiz_time_data.dart';
 import 'package:Midori/quiz_time_data.dart' as QuizTimeData;
 
@@ -46,8 +47,7 @@ class AnswerListItem implements AnswerListSkel {
                   child: Center(
                       child: Text(
                     kana,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.black),
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   )),
                 ),
                 Expanded(
@@ -111,26 +111,26 @@ class ResultScreen extends StatelessWidget {
 
     // final ResultArguments args = ModalRoute.of(context).settings.arguments;
     _saveStats() async {
-      final prefs = await SharedPreferences.getInstance();
-      int rightAns;
-      int wrongAns;
-      int skipped;
+      final prefs = GetStorage();
+      int rightAns = 0;
+      int wrongAns = 0;
+      int skipped = 0;
 
-      if (prefs.containsKey('rightAns')) {
-        rightAns = prefs.getInt('rightAns');
+      if (prefs.hasData('rightAns')) {
+        rightAns = prefs.read('rightAns');
       }
-      if (prefs.containsKey('wrongAns')) {
-        wrongAns = prefs.getInt('wrongAns');
+      if (prefs.hasData('wrongAns')) {
+        wrongAns = prefs.read('wrongAns');
       }
-      if (prefs.containsKey('skipped')) {
-        skipped = prefs.getInt('skipped');
+      if (prefs.hasData('skipped')) {
+        skipped = prefs.read('skipped');
       }
       wrongAns += QuizTimeData.wrongAnswers.length;
       rightAns += QuizTimeData.rightAnswers.length;
       skipped += QuizTimeData.skippedAnswers.length;
-      prefs.setInt('rightAns', rightAns);
-      prefs.setInt('wrongAns', wrongAns);
-      prefs.setInt('skipped', skipped);
+      prefs.write('rightAns', rightAns);
+      prefs.write('wrongAns', wrongAns);
+      prefs.write('skipped', skipped);
     }
 
     _saveStats();

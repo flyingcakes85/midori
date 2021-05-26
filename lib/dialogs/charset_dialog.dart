@@ -113,7 +113,6 @@ class _CharSetDialogState extends State<CharSetDialog> {
                   child: const Text('CONTINUE'),
                   onPressed: () {
                     print(_checked);
-                    Navigator.pop(context, _checked);
                     List<List<String>> quizEntries = [];
 
                     if (chosenCharSet == 0) {
@@ -131,15 +130,30 @@ class _CharSetDialogState extends State<CharSetDialog> {
                         }
                       }
                     }
-                    quizEntries.shuffle();
-                    QuizTimeData.quizEntries = quizEntries;
-                    QuizTimeData.currentQuestionIndex = 0;
-                    QuizTimeData.score = 0;
-                    Navigator.pushNamed(
-                      context,
-                      QuizScreen.routeName,
-                      arguments: QuizArguments(),
-                    );
+                    if (quizEntries.length == 0) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Row(
+                            children: [
+                              Icon(Icons.warning_amber_outlined),
+                              SizedBox(width: 6),
+                              Text("You need to select at least one option."),
+                            ],
+                          ),
+                        ),
+                      );
+                    } else {
+                      quizEntries.shuffle();
+                      Navigator.pop(context, _checked);
+                      QuizTimeData.quizEntries = quizEntries;
+                      QuizTimeData.currentQuestionIndex = 0;
+                      QuizTimeData.score = 0;
+                      Navigator.pushNamed(
+                        context,
+                        QuizScreen.routeName,
+                        arguments: QuizArguments(),
+                      );
+                    }
                   },
                 ),
                 const SizedBox(width: 10),
