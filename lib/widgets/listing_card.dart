@@ -29,7 +29,15 @@ class ListingCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           ListTile(
-            leading: Icon(Icons.school),
+            leading: CircleAvatar(
+              backgroundColor: Colors.greenAccent,
+              child: Center(
+                child: Text(
+                  chosenCharSet == 0 ? "ひ" : "カ",
+                  style: TextStyle(fontSize: 24),
+                ),
+              ),
+            ),
             title: Text(
               titleText,
               style: TextStyle(fontSize: 20),

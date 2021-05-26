@@ -54,7 +54,10 @@ class _HomeViewState extends State<HomeView>
         elevation: 1,
         bottom: TabBar(
             controller: _tabController,
-            indicatorColor: Colors.white,
+            indicatorColor:
+                !isDarkModeEnabled ? Colors.greenAccent : Colors.white,
+            labelColor: !isDarkModeEnabled ? Colors.greenAccent : Colors.white,
+            unselectedLabelColor: Colors.white70,
             tabs: <Widget>[
               Tab(
                 icon: Icon(Icons.book),

@@ -36,7 +36,8 @@ class LearnCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           ListTile(
-            leading: Icon(Icons.public),
+            leading: CircleAvatar(
+                backgroundColor: Colors.greenAccent, child: Icon(Icons.public)),
             title: Text(
               titleText,
               style: TextStyle(fontSize: 20),

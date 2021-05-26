@@ -59,6 +59,8 @@ class _CharSetDialogState extends State<CharSetDialog> {
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 )),
             CheckboxListTile(
+              checkColor: Colors.white,
+              activeColor: Colors.green,
               title:
                   Text(charSet.elementAt(chosenCharSet).elementAt(0)['text']),
               secondary:
@@ -71,6 +73,8 @@ class _CharSetDialogState extends State<CharSetDialog> {
               },
             ),
             CheckboxListTile(
+              checkColor: Colors.white,
+              activeColor: Colors.green,
               title:
                   Text(charSet.elementAt(chosenCharSet).elementAt(1)['text']),
               secondary:
@@ -83,6 +87,8 @@ class _CharSetDialogState extends State<CharSetDialog> {
               },
             ),
             CheckboxListTile(
+              checkColor: Colors.white,
+              activeColor: Colors.green,
               title:
                   Text(charSet.elementAt(chosenCharSet).elementAt(2)['text']),
               secondary:
@@ -95,6 +101,8 @@ class _CharSetDialogState extends State<CharSetDialog> {
               },
             ),
             CheckboxListTile(
+              checkColor: Colors.white,
+              activeColor: Colors.green,
               title:
                   Text(charSet.elementAt(chosenCharSet).elementAt(3)['text']),
               secondary:

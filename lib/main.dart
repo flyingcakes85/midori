@@ -34,7 +34,7 @@ class Midori extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isDarkThemeEnabled =
-        (GetStorage().read("isDarkModeEnabled") ?? false);
+        (GetStorage().read("isDarkModeEnabled") ?? true);
 
     return GetMaterialApp(
       title: 'Midori',
