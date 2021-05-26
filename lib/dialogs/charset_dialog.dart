@@ -29,13 +29,13 @@ class _CharSetDialogState extends State<CharSetDialog> {
   var charSet = {
     {
       {'lead': '25', 'text': 'First 25 Hiragana\nあ - な'},
-      {'lead': '20', 'text': 'Next 21 Hiragana\nは - を'},
+      {'lead': '21', 'text': 'Next 21 Hiragana\nは - を'},
       {'lead': '25', 'text': 'Dakuten Kana\nが - ぽ'},
       {'lead': '36', 'text': 'Combo Hiragana\nきゃ - ぴょ'}
     },
     {
       {'lead': '25', 'text': 'First 25 Katakana\nア - ノ'},
-      {'lead': '20', 'text': 'Next 21 Katakana\nハ - ヲ'},
+      {'lead': '21', 'text': 'Next 21 Katakana\nハ - ヲ'},
       {'lead': '25', 'text': 'Dakuten Kana\nガ - ポ'},
       {'lead': '36', 'text': 'Combo Katakana\nキャ - ピョ'}
     }
@@ -58,62 +58,10 @@ class _CharSetDialogState extends State<CharSetDialog> {
                   'Select the kana sets you want to practice:',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 )),
-            CheckboxListTile(
-              checkColor: Colors.white,
-              activeColor: Colors.green,
-              title:
-                  Text(charSet.elementAt(chosenCharSet).elementAt(0)['text']),
-              secondary:
-                  Text(charSet.elementAt(chosenCharSet).elementAt(0)['lead']),
-              value: _checked[0],
-              onChanged: (bool value) {
-                setState(() {
-                  _checked[0] = value;
-                });
-              },
-            ),
-            CheckboxListTile(
-              checkColor: Colors.white,
-              activeColor: Colors.green,
-              title:
-                  Text(charSet.elementAt(chosenCharSet).elementAt(1)['text']),
-              secondary:
-                  Text(charSet.elementAt(chosenCharSet).elementAt(1)['lead']),
-              value: _checked[1],
-              onChanged: (bool value) {
-                setState(() {
-                  _checked[1] = value;
-                });
-              },
-            ),
-            CheckboxListTile(
-              checkColor: Colors.white,
-              activeColor: Colors.green,
-              title:
-                  Text(charSet.elementAt(chosenCharSet).elementAt(2)['text']),
-              secondary:
-                  Text(charSet.elementAt(chosenCharSet).elementAt(2)['lead']),
-              value: _checked[2],
-              onChanged: (bool value) {
-                setState(() {
-                  _checked[2] = value;
-                });
-              },
-            ),
-            CheckboxListTile(
-              checkColor: Colors.white,
-              activeColor: Colors.green,
-              title:
-                  Text(charSet.elementAt(chosenCharSet).elementAt(3)['text']),
-              secondary:
-                  Text(charSet.elementAt(chosenCharSet).elementAt(3)['lead']),
-              value: _checked[3],
-              onChanged: (bool value) {
-                setState(() {
-                  _checked[3] = value;
-                });
-              },
-            ),
+            buildCheckboxListTile(0),
+            buildCheckboxListTile(1),
+            buildCheckboxListTile(2),
+            buildCheckboxListTile(3),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
@@ -169,5 +117,21 @@ class _CharSetDialogState extends State<CharSetDialog> {
             ),
           ]),
         ));
+  }
+
+  CheckboxListTile buildCheckboxListTile(int index) {
+    return CheckboxListTile(
+      checkColor: Colors.white,
+      activeColor: Colors.green,
+      title: Text(charSet.elementAt(chosenCharSet).elementAt(index)['text']),
+      secondary:
+          Text(charSet.elementAt(chosenCharSet).elementAt(index)['lead']),
+      value: _checked[index],
+      onChanged: (bool value) {
+        setState(() {
+          _checked[index] = value;
+        });
+      },
+    );
   }
 }

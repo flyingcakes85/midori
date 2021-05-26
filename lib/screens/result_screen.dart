@@ -136,6 +136,10 @@ class ResultScreen extends StatelessWidget {
       prefs.write('rightAns', rightAns);
       prefs.write('wrongAns', wrongAns);
       prefs.write('skipped', skipped);
+
+      QuizTimeData.rightAnswers.clear();
+      QuizTimeData.wrongAnswers.clear();
+      QuizTimeData.skippedAnswers.clear();
     }
 
     _saveStats();
@@ -155,7 +159,7 @@ class ResultScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           Text(
-                            QuizTimeData.score.toString(),
+                            rightItems.length.toString(),
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 72,
@@ -172,7 +176,7 @@ class ResultScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           Text(
-                            QuizTimeData.wrongAnswers.length.toString(),
+                            wrongItems.length.toString(),
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 72,
@@ -188,7 +192,7 @@ class ResultScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           Text(
-                            QuizTimeData.skippedAnswers.length.toString(),
+                            skippedItems.length.toString(),
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 72,
