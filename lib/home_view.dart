@@ -43,7 +43,7 @@ class _HomeViewState extends State<HomeView>
       length: 3,
     );
 
-    isDarkModeEnabled = (GetStorage().read("isDarkModeEnabled") ?? false);
+    isDarkModeEnabled = Get.isDarkMode;
   }
 
   @override
@@ -51,27 +51,20 @@ class _HomeViewState extends State<HomeView>
     return Scaffold(
       appBar: AppBar(
         title: Text('緑 Midori'),
-        elevation: 1,
-        bottom: TabBar(
-            controller: _tabController,
-            indicatorColor:
-                !isDarkModeEnabled ? Colors.greenAccent : Colors.white,
-            labelColor: !isDarkModeEnabled ? Colors.greenAccent : Colors.white,
-            unselectedLabelColor: Colors.white70,
-            tabs: <Widget>[
-              Tab(
-                icon: Icon(Icons.book),
-                text: 'LEARN',
-              ),
-              Tab(
-                icon: Icon(Icons.rule),
-                text: 'TEST',
-              ),
-              Tab(
-                icon: Icon(Icons.timeline),
-                text: 'STATS',
-              ),
-            ]),
+        bottom: TabBar(controller: _tabController, tabs: <Widget>[
+          Tab(
+            icon: Icon(Icons.book),
+            text: 'LEARN',
+          ),
+          Tab(
+            icon: Icon(Icons.rule),
+            text: 'TEST',
+          ),
+          Tab(
+            icon: Icon(Icons.timeline),
+            text: 'STATS',
+          ),
+        ]),
         actions: <Widget>[
           PopupMenuButton<String>(
             onSelected: handleClick,

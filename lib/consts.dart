@@ -22,6 +22,13 @@ class Consts {
     accentColor: Colors.greenAccent,
     brightness: Brightness.light,
     visualDensity: VisualDensity.adaptivePlatformDensity,
+    tabBarTheme: TabBarTheme(
+      labelColor: Colors.white,
+      unselectedLabelColor: Colors.white70,
+      indicator: UnderlineTabIndicator(
+        borderSide: BorderSide(color: Colors.white, width: 2),
+      ),
+    ),
   );
 
   static final darkTheme = ThemeData(
@@ -29,5 +36,9 @@ class Consts {
     accentColor: Colors.greenAccent,
     brightness: Brightness.dark,
     visualDensity: VisualDensity.adaptivePlatformDensity,
+    tabBarTheme: TabBarTheme(
+      labelColor: Colors.greenAccent,
+      unselectedLabelColor: Colors.white70,
+    ),
   );
 }
