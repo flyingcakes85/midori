@@ -15,7 +15,7 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:midori/dialogs/charset_dialog.dart';
+import 'package:midori/screens/charset_picker.dart';
 
 class ListingCard extends StatelessWidget {
   final String titleText;
