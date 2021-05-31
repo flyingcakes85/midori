@@ -35,44 +35,42 @@ class AnswerListItem implements AnswerListSkel {
   AnswerListItem(this.kana, this.romaji, this.userAnswer);
 
   Widget resultRow(BuildContext context) {
-    return Card(
-        elevation: 2,
-        child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 15),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: Center(
-                      child: Text(
-                    kana,
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  )),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: Center(
-                      child: Text(
-                    romaji,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.green),
-                  )),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: Center(
-                      child: Text(
-                    userAnswer,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: romaji == userAnswer
-                            ? Colors.green
-                            : (userAnswer == '-' ? Colors.grey : Colors.red)),
-                  )),
-                ),
-              ],
-            )));
+    return Padding(
+        padding: EdgeInsets.symmetric(vertical: 15),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Expanded(
+              flex: 1,
+              child: Center(
+                  child: Text(
+                kana,
+                style: TextStyle(fontWeight: FontWeight.bold),
+              )),
+            ),
+            Expanded(
+              flex: 1,
+              child: Center(
+                  child: Text(
+                romaji,
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.green),
+              )),
+            ),
+            Expanded(
+              flex: 1,
+              child: Center(
+                  child: Text(
+                userAnswer,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: romaji == userAnswer
+                        ? Colors.green
+                        : (userAnswer == '-' ? Colors.grey : Colors.red)),
+              )),
+            ),
+          ],
+        ));
   }
 }
 
