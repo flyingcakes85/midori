@@ -17,11 +17,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-import 'package:Midori/screens/learn_screen.dart';
-import 'package:Midori/screens/stats_screen.dart';
-import 'package:Midori/screens/test_screen.dart';
-import 'package:Midori/screens/about_screen.dart';
-import 'package:Midori/consts.dart';
+import 'package:midori/screens/learn_screen.dart';
+import 'package:midori/screens/stats_screen.dart';
+import 'package:midori/screens/test_screen.dart';
+import 'package:midori/screens/about_screen.dart';
+import 'package:midori/consts.dart';
 
 class HomeView extends StatefulWidget {
   @override

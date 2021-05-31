@@ -17,12 +17,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-import 'package:Midori/home_view.dart';
-import 'package:Midori/screens/quiz_screen.dart';
-import 'package:Midori/screens/result_screen.dart';
-import 'package:Midori/screens/about_screen.dart';
-import 'package:Midori/screens/license_screen.dart';
-import 'package:Midori/consts.dart';
+import 'package:midori/home_view.dart';
+import 'package:midori/screens/quiz_screen.dart';
+import 'package:midori/screens/result_screen.dart';
+import 'package:midori/screens/about_screen.dart';
+import 'package:midori/screens/license_screen.dart';
+import 'package:midori/consts.dart';
 
 void main() async {
   await GetStorage.init();

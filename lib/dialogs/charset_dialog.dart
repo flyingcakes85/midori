@@ -14,9 +14,9 @@
 //     along with Midori.  If not, see <https://www.gnu.org/licenses/>.
 
 import 'package:flutter/material.dart';
-import 'package:Midori/screens/quiz_screen.dart';
-import 'package:Midori/quiz_time_data.dart' as QuizTimeData;
-import 'package:Midori/romaji_maps.dart';
+import 'package:midori/screens/quiz_screen.dart';
+import 'package:midori/quiz_time_data.dart' as QuizTimeData;
+import 'package:midori/romaji_maps.dart';
 
 class CharSetDialog extends StatefulWidget {
   final int chosenCharSet;

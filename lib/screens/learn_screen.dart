@@ -14,7 +14,7 @@
 //     along with Midori.  If not, see <https://www.gnu.org/licenses/>.
 
 import 'package:flutter/material.dart';
-import 'package:Midori/widgets/learn_card.dart';
+import 'package:midori/widgets/learn_card.dart';
 
 class LearnScreen extends StatelessWidget {
   @override

@@ -14,8 +14,8 @@
 //     along with Midori.  If not, see <https://www.gnu.org/licenses/>.
 
 import 'package:flutter/material.dart';
-import 'package:Midori/screens/result_screen.dart';
-import 'package:Midori/quiz_time_data.dart' as QuizTimeData;
+import 'package:midori/screens/result_screen.dart';
+import 'package:midori/quiz_time_data.dart' as QuizTimeData;
 
 class QuizArguments {
   QuizArguments();

@@ -18,8 +18,8 @@ import 'package:flutter/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:get/get.dart';
 
-import 'package:Midori/screens/license_screen.dart';
-import 'package:Midori/screens/donate_screen.dart';
+import 'package:midori/screens/license_screen.dart';
+import 'package:midori/screens/donate_screen.dart';
 
 launchURL(String url) async {
   if (await canLaunch(url)) {

@@ -15,7 +15,7 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:Midori/widgets/listing_card.dart';
+import 'package:midori/widgets/listing_card.dart';
 
 class TestScreen extends StatelessWidget {
   @override

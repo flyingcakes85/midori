@@ -16,8 +16,8 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 
-import 'package:Midori/quiz_time_data.dart';
-import 'package:Midori/quiz_time_data.dart' as QuizTimeData;
+import 'package:midori/quiz_time_data.dart';
+import 'package:midori/quiz_time_data.dart' as QuizTimeData;
 
 class ResultArguments {
   ResultArguments();
