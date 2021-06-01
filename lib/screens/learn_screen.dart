@@ -22,10 +22,8 @@ class LearnScreen extends StatelessWidget {
     return Container(
         padding: EdgeInsets.all(10),
         child: Column(children: [
-          LearnCard('Hiragana', 'Learn more on Wikipedia',
-              'https://en.wikipedia.org/wiki/Hiragana'),
-          LearnCard('Katakana', 'Learn more on Wikipedia',
-              'https://en.wikipedia.org/wiki/Katakana'),
+          LearnCard('Hiragana', 'Learn and test in short bites', 0),
+          LearnCard('Katakana', 'Learn and test in short bites', 1),
         ]));
   }
 }

@@ -14,7 +14,11 @@
 //     along with Midori.  If not, see <https://www.gnu.org/licenses/>.
 
 import 'package:flutter/material.dart';
+import 'package:midori/consts.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:get/get.dart';
+
+import 'package:midori/screens/learn_status.dart';
 
 launchURL(String url) async {
   if (await canLaunch(url)) {
@@ -27,8 +31,12 @@ launchURL(String url) async {
 class LearnCard extends StatelessWidget {
   final String titleText;
   final String subtitleText;
-  final String url;
-  LearnCard(this.titleText, this.subtitleText, this.url);
+  // final String url;
+
+  // 0 for Hiragana
+  // 1 for Katakana
+  final int chosenCharset;
+  LearnCard(this.titleText, this.subtitleText, this.chosenCharset);
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -51,9 +59,14 @@ class LearnCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               TextButton(
-                child: const Text('OPEN IN BROWSER'),
+                child: const Text('START'),
                 onPressed: () {
-                  launchURL(url);
+                  // launchURL(url);
+                  Get.to(() => LearnStatus(
+                      chosenCharset,
+                      Get.isDarkMode
+                          ? Consts.darkTheme.cardColor
+                          : Consts.lightTheme.cardColor));
                 },
               ),
               const SizedBox(width: 8),

@@ -160,7 +160,8 @@ class _QuizScreenState extends State<QuizScreen> {
       else
         isWrong = true;
     });
-    Future.delayed(Duration(milliseconds: 500), () {
+    Future.delayed(Duration(milliseconds: 1000), () {
+      if (!mounted) return;
       setState(() {
         if (answerTruth)
           isRight = false;
@@ -217,7 +218,12 @@ class _QuizScreenState extends State<QuizScreen> {
               ),
               SizedBox(height: 16, width: 10),
               GestureDetector(
-                onTap: () => Navigator.of(context).pop(true),
+                onTap: () {
+                  QuizTimeData.currentQuestionIndex = 0;
+                  QuizTimeData.prefKey = "null";
+                  QuizTimeData.quizEntries.clear();
+                  Navigator.of(context).pop(true);
+                },
                 child: Text("YES"),
               ),
             ],

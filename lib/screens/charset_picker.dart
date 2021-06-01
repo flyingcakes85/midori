@@ -141,7 +141,7 @@ class _CharSetDialogState extends State<CharSetDialog> {
                   );
                 } else {
                   quizEntries.shuffle();
-                  Navigator.pop(context, selected);
+                  Navigator.pop(context);
                   QuizTimeData.quizEntries = quizEntries;
                   QuizTimeData.currentQuestionIndex = 0;
                   QuizTimeData.score = 0;

@@ -20,3 +20,4 @@ List<List<String>> wrongAnswers = [];
 List<List<String>> rightAnswers = [];
 List<List<String>> skippedAnswers = [];
 int score;
+String prefKey;

@@ -15,6 +15,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:midori/quiz_time_data.dart';
 import 'package:midori/quiz_time_data.dart' as QuizTimeData;
@@ -138,6 +139,20 @@ class ResultScreen extends StatelessWidget {
       QuizTimeData.rightAnswers.clear();
       QuizTimeData.wrongAnswers.clear();
       QuizTimeData.skippedAnswers.clear();
+
+      if (wrongItems.length == 0 &&
+          skippedItems.length == 0 &&
+          QuizTimeData.prefKey != "null") {
+        prefs.write(QuizTimeData.prefKey, true);
+        QuizTimeData.prefKey = "null";
+      } else {
+        Fluttertoast.showToast(
+            msg:
+                "Retake the test from previous screen and solve all correct to get this mark done",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.CENTER,
+            fontSize: 16.0);
+      }
     }
 
     _saveStats();
