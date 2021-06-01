@@ -44,7 +44,7 @@ class ListingCard extends StatelessWidget {
             ),
             subtitle: Text(
               subtitleText,
-              style: TextStyle(fontSize: 18),
+              style: TextStyle(fontSize: 16),
             ),
           ),
           Row(

@@ -35,8 +35,8 @@ class LearnCard extends StatelessWidget {
 
   // 0 for Hiragana
   // 1 for Katakana
-  final int chosenCharset;
-  LearnCard(this.titleText, this.subtitleText, this.chosenCharset);
+  final int chosenCharSet;
+  LearnCard(this.titleText, this.subtitleText, this.chosenCharSet);
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -45,14 +45,21 @@ class LearnCard extends StatelessWidget {
         children: <Widget>[
           ListTile(
             leading: CircleAvatar(
-                backgroundColor: Colors.greenAccent, child: Icon(Icons.public)),
+              backgroundColor: Colors.greenAccent,
+              child: Center(
+                child: Text(
+                  chosenCharSet == 0 ? "ひ" : "カ",
+                  style: TextStyle(fontSize: 24),
+                ),
+              ),
+            ),
             title: Text(
               titleText,
               style: TextStyle(fontSize: 20),
             ),
             subtitle: Text(
               subtitleText,
-              style: TextStyle(fontSize: 18),
+              style: TextStyle(fontSize: 16),
             ),
           ),
           Row(
@@ -63,7 +70,7 @@ class LearnCard extends StatelessWidget {
                 onPressed: () {
                   // launchURL(url);
                   Get.to(() => LearnStatus(
-                      chosenCharset,
+                      chosenCharSet,
                       Get.isDarkMode
                           ? Consts.darkTheme.cardColor
                           : Consts.lightTheme.cardColor));

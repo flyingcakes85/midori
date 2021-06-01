@@ -23,8 +23,8 @@ class TestScreen extends StatelessWidget {
     return Container(
         padding: EdgeInsets.all(10),
         child: Column(children: [
-          ListingCard('Hiragana', 'ひらがな', 0),
-          ListingCard('Katakana', 'カタカナ', 1),
+          ListingCard('Hiragana / ひらがな', 'Test your skills!', 0),
+          ListingCard('Katakana / カタカナ', 'Test your skills!', 1),
         ]));
   }
 }

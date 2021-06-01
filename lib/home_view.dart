@@ -53,12 +53,12 @@ class _HomeViewState extends State<HomeView>
         title: Text('緑 Midori'),
         bottom: TabBar(controller: _tabController, tabs: <Widget>[
           Tab(
-            icon: Icon(Icons.book),
-            text: 'LEARN',
-          ),
-          Tab(
             icon: Icon(Icons.rule),
             text: 'TEST',
+          ),
+          Tab(
+            icon: Icon(Icons.book),
+            text: 'LEARN',
           ),
           Tab(
             icon: Icon(Icons.timeline),
@@ -82,8 +82,8 @@ class _HomeViewState extends State<HomeView>
       body: TabBarView(
         controller: _tabController,
         children: <Widget>[
-          LearnScreen(),
           TestScreen(),
+          LearnScreen(),
           StatsScreen(),
         ],
       ),
